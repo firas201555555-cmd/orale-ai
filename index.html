@@ -321,8 +321,12 @@ function suggest(text){
   sendMessage();
 }
 function newChat(){
-  chat.innerHTML="";
-  addMessage("مرحباً! بدأت محادثة جديدة. ✨","bot");
+ chat.innerHTML="";
+  addMessage(
+    "مرحباً بك في ORALE AI! ✨ أنا مساعد ذكي تجريبي. قد أخطئ أحياناً، لذلك تحقق من المعلومات المهمة. لا تشارك كلمات المرور أو معلوماتك الشخصية الحساسة.",
+    "bot"
+  );
+} 
 }
 function clearChat(){chat.innerHTML=""}
 function showInfo(){
