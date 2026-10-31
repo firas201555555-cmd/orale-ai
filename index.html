@@ -309,12 +309,31 @@ function getReply(text){
   return "✨ وصلتني رسالتك! أنا ORALE AI في نسختي التجريبية، وردودي حالياً جاهزة ومحدودة.";
 }
 
-function sendMessage(){
-  const text=input.value.trim();
-  if(!text)return;
-  addMessage(text,"user");
-  input.value="";
-  setTimeout(()=>addMessage(getReply(text),"bot"),350);
+async function sendMessage(){
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  input.value = "";
+
+  const loading = document.createElement("div");
+  loading.className = "message bot";
+  loading.textContent = "جاري التفكير... ✨";
+  chat.appendChild(loading);
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text })
+    });
+
+    const data = await response.json();
+    loading.textContent = data.reply || "لم تصل إجابة.";
+  } catch (error) {
+    loading.textContent = "تعذر الاتصال بالخادم. حاول مرة أخرى.";
+  }
+}
 }
 function suggest(text){
   input.value=text;
