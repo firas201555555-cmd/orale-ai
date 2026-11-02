@@ -353,4 +353,67 @@ function showInfo(){
 </script>
 </body>
 </html>
+<div class="api-box">
+  <h3>🔑 Gemini API</h3>
 
+  <input
+    id="apiKey"
+    type="password"
+    placeholder="ضع مفتاح API هنا"
+  >
+
+  <button onclick="toggleKey()">إظهار / إخفاء</button>
+  <button onclick="sendKey()">إرسال</button>
+
+  <p id="apiStatus"></p>
+</div>
+
+<style>
+.api-box {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 18px;
+  background: #10243b;
+  color: white;
+  border: 1px solid #55c8ff;
+  border-radius: 15px;
+  text-align: center;
+}
+.api-box input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #55c8ff;
+}
+.api-box button {
+  padding: 10px 16px;
+  margin: 5px;
+  border: 0;
+  border-radius: 8px;
+  background: #168bd0;
+  color: white;
+  cursor: pointer;
+}
+</style>
+
+<script>
+function toggleKey() {
+  const input = document.getElementById("apiKey");
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+function sendKey() {
+  const key = document.getElementById("apiKey").value.trim();
+  const status = document.getElementById("apiStatus");
+
+  if (!key) {
+    status.textContent = "أدخل المفتاح أولاً.";
+    return;
+  }
+
+  status.textContent =
+    "لا ترسل المفتاح من الصفحة العامة. أضفه في Vercel باسم GEMINI_API_KEY.";
+}
+</script>
